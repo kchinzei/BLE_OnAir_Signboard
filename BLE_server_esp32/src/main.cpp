@@ -1,6 +1,6 @@
 /*
   Original code from https://zenn.dev/luup/articles/iot-yamaguchi-20221204
-  titled 「ESP32でBLEデバイスを作る」 by uup Developers Blog, on Dec 2022
+  titled 「ESP32でBLEデバイスを作る」 by Luup Developers Blog, on Dec 2022
 */
 /*
  BLE On Air signboard server.

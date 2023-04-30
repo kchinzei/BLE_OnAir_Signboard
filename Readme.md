@@ -5,7 +5,7 @@ A BLE server - client kit to remotely turn on/off LED, an "On Air" signboard in 
 It turns on the LED when Zoom, WebEx or Microsoft Teams process is running on a PC (macOS), to indicate you are 'on air' now.
 It can also receive the status of switch at the signbaord.
 
-[config](./Doc/config.png "Configuration")
+![config](./Doc/config.png "Configuration")
 
 ## Preliquiste
 
@@ -22,7 +22,7 @@ It can also receive the status of switch at the signbaord.
 
 ### Circuit Example
 
-[circuit](./Doc/circuit.png "Circuit diagram example")
+![circuit](./Doc/circuit.png "Circuit diagram example")
 
 I used pin 16 and 17 of Esp32.
 Other pins except those with special functions should work.
@@ -47,7 +47,7 @@ Esp32 accepts 3.3V input.
 
 # Acknowledgemnt
 
-BLE_server_esp32's c++ code is originally from ["ESP32でBLEデバイスを作る" by uup Developers Blog](https://zenn.dev/luup/articles/iot-yamaguchi-20221204), on Dec 2022.
+BLE_server_esp32's c++ code is originally from ["ESP32でBLEデバイスを作る" by Luup Developers Blog](https://zenn.dev/luup/articles/iot-yamaguchi-20221204), on Dec 2022.
 
 # License
 
