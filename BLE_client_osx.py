@@ -22,16 +22,22 @@ This script is to remotely turn on/off LED light. The light is connected to an E
 board acted as the BLE server.
 """
 import asyncio
+import subprocess
+import json
+
 from logging import getLogger
 from bleak import BleakScanner, BleakClient
 from bleak.backends.characteristic import BleakGATTCharacteristic
 from bleak.exc import BleakError
 
+APPS_TO_FIND = ('Microsoft Teams', 'zoom', 'Webex')
 DEVICE_NAME = 'MyBLEDevice'
 SERVICE_UUID = "55725ac1-066c-48b5-8700-2d9fb3603c5e"
 CHARACTERISTIC_UUID = '69ddb59c-d601-4ea4-ba83-44f679a670ba'
+PINSTATE_STR = 'state'
 
 logger = getLogger(__name__)
+manual_sw_state = False
 
 async def print_client_status(client):
     print(f'connected to {client.address=}')
@@ -51,11 +57,25 @@ async def print_client_status(client):
 
 def notification_handler(characteristic: BleakGATTCharacteristic, data: bytearray):
     """Simple notification handler which prints the data received."""
-    logger.info('%s: %s', characteristic.description, data.decode())
-    print(f'notification received: {data.decode()}')
+    global manual_sw_state
+    s = data.decode()
+    logger.info('%s: %s', characteristic.description, s)
+    print(f'notification received: {s}')
+    dic = json.loads(s)
+    c = dic.get(PINSTATE_STR, '0')
+    manual_sw_state = False if c == '0' else True
 
+def check_app_running(apps):
+    for app in apps:
+        cmd = f'ps -ax | grep "{app}" | wc -l'
+        proc = subprocess.Popen(cmd, shell=True, text=True, stdout=subprocess.PIPE)
+        stdout, stderr = proc.communicate()
+        if int(stdout.rstrip()) > 2:
+            return True
+    return False
 
 async def main():
+    global manual_sw_state
     while True:
         device = None
         while device is None:
@@ -67,15 +87,15 @@ async def main():
         print(f'\t{device.details=}')
 
         try:
-            dummy: bool = True
             async with BleakClient(device, services=[SERVICE_UUID], timeout=10) as client:
                 await asyncio.wait_for(client.start_notify(CHARACTERISTIC_UUID, notification_handler), timeout=10)
                 # print_client_status(client)
                 while client.is_connected:
-                    b = b'\x01' if dummy else b'\x00'
-                    dummy = not dummy
+                    if manual_sw_state == False:
+                        app_running = check_app_running(APPS_TO_FIND)
+                        b = b'\x01' if app_running else b'\x00'
 
-                    await asyncio.wait_for(client.write_gatt_char(CHARACTERISTIC_UUID, b, response=True), timeout=10)
+                        await asyncio.wait_for(client.write_gatt_char(CHARACTERISTIC_UUID, b, response=True), timeout=10)
                     await asyncio.sleep(2.0)
         except (asyncio.TimeoutError, BleakError) as e:
             logger.info(f'Exception {e=}')

@@ -9,12 +9,12 @@ It can also receive the status of switch at the signbaord.
 
 ## Preliquiste
 
-### BLE_client_osx.py
+### BLE\_client_\osx.py
 
 - macOS PC
 - bleak : `pip install bleak`
 
-### BLE_server_esp32
+### BLE\_server\_esp32
 
 - ESP32 board computer
 - LED signboard (any) + I/O circuit
@@ -36,7 +36,7 @@ It uses USB power to turn on a line of LEDs.
 The switch to turn on/off can be as simple as a mechanical switch,
 or silicon switch with brightness adjustment.
 I wanted to allow manually turn on/off it,
-so I left the orifinal switch circuit.
+so I left the original switch circuit.
 To obtain the status change of the manual switch,
 a signal is taken from the circuit.
 It depends on the circuit of your signboard.
@@ -47,7 +47,7 @@ Esp32 accepts 3.3V input.
 
 # Acknowledgemnt
 
-BLE_server_esp32's c++ code is originally from ["ESP32でBLEデバイスを作る" by Luup Developers Blog](https://zenn.dev/luup/articles/iot-yamaguchi-20221204), on Dec 2022.
+BLE\_server\_esp32's c++ code is originally from ["ESP32でBLEデバイスを作る" by Luup Developers Blog](https://zenn.dev/luup/articles/iot-yamaguchi-20221204), on Dec 2022.
 
 # License
 
