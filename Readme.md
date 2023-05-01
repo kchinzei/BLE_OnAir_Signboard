@@ -1,7 +1,7 @@
 # BLE Server/Client for "On Air" Signboard
 
 A BLE server - client kit to remotely turn on/off LED, an "On Air" signboard in my application.
-
+![signboard](./Doc/signboard.jpg "Example of a signboard; On Air")
 It turns on the LED when Zoom, WebEx or Microsoft Teams process is running on a PC (macOS), to indicate you are 'on air' now.
 It can also receive the status of switch at the signbaord.
 

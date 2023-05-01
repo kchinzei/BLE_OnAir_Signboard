@@ -22,8 +22,6 @@
 #define BLE_DEVICE_NAME     "MyBLEDevice"
 #define LED_PIN             16
 #define INPUT_PIN           17
-#define INPUTPIN_STR        "inputPin:"
-#define PINSTATE_STR        "state:"
 
 //---------------------------------------------------------
 // Variables
@@ -116,7 +114,7 @@ void loop() {
   // INPUT
   if(digitalRead(INPUT_PIN) != inputPinState){
     inputPinState = !inputPinState;
-    String str = INPUTPIN_STR + String(INPUT_PIN) + " " + PINSTATE_STR + String(inputPinState? 1:0);
+    String str = String(inputPinState? 1:0);
     
     Serial.println(str);
     // Notify

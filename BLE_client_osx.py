@@ -34,7 +34,6 @@ APPS_TO_FIND = ('Microsoft Teams', 'zoom', 'Webex')
 DEVICE_NAME = 'MyBLEDevice'
 SERVICE_UUID = "55725ac1-066c-48b5-8700-2d9fb3603c5e"
 CHARACTERISTIC_UUID = '69ddb59c-d601-4ea4-ba83-44f679a670ba'
-PINSTATE_STR = 'state'
 
 logger = getLogger(__name__)
 manual_sw_state = False
@@ -61,9 +60,7 @@ def notification_handler(characteristic: BleakGATTCharacteristic, data: bytearra
     s = data.decode()
     logger.info('%s: %s', characteristic.description, s)
     print(f'notification received: {s}')
-    dic = json.loads(s)
-    c = dic.get(PINSTATE_STR, '0')
-    manual_sw_state = False if c == '0' else True
+    manual_sw_state = False if s == '0' else True
 
 def check_app_running(apps):
     for app in apps:
