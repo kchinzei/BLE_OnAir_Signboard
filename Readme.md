@@ -7,9 +7,9 @@ It can also receive the status of switch at the signbaord.
 
 ![config](./Doc/config.png "Configuration")
 
-## Preliquiste
+## Preliquisite
 
-### BLE\_client_\osx.py
+### BLE\_client\_osx.py
 
 - macOS PC
 - bleak : `pip install bleak`
