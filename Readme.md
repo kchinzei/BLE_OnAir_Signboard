@@ -29,12 +29,16 @@ Other pins except those with special functions should work.
 I used [ESP-WROOM-32 from Switch Science](https://www.switch-science.com/products/6364).
 M5Stack etc should also work.
 
+![esp32](./Doc/esp32_wiring.jpg "Wiring on ESP-WROOM-32")
+
 ### LED signboard
 
+I bought it at AliExpress.
 LED signboards are very simple in terms of electronics.
 It uses USB power to turn on a line of LEDs.
 The switch to turn on/off can be as simple as a mechanical switch,
 or silicon switch with brightness adjustment.
+My one was the latter.
 I wanted to allow manually turn on/off it,
 so I left the original switch circuit.
 To obtain the status change of the manual switch,
