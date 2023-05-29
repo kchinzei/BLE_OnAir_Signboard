@@ -30,7 +30,7 @@ from bleak import BleakScanner, BleakClient
 from bleak.backends.characteristic import BleakGATTCharacteristic
 from bleak.exc import BleakError
 
-APPS_TO_FIND = ('Microsoft Teams', 'zoom', 'Webex')
+APPS_TO_FIND = ('Microsoft Teams', 'zoom', 'Webex', '/System/Applications/FaceTime.app/Contents/MacOS/FaceTime')
 DEVICE_NAME = 'MyBLEDevice'
 SERVICE_UUID = "55725ac1-066c-48b5-8700-2d9fb3603c5e"
 CHARACTERISTIC_UUID = '69ddb59c-d601-4ea4-ba83-44f679a670ba'
