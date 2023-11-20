@@ -30,7 +30,11 @@ from bleak import BleakScanner, BleakClient
 from bleak.backends.characteristic import BleakGATTCharacteristic
 from bleak.exc import BleakError
 
-APPS_TO_FIND = ('Microsoft Teams', 'zoom', 'Webex', '/System/Applications/FaceTime.app/Contents/MacOS/FaceTime')
+APPS_TO_FIND = ('/Applications/Microsoft Teams.app/Contents/MacOS/Teams', \
+                '/Applications/Microsoft Teams classic.app/Contents/MacOS/Teams', \
+                '/Applications/zoom.us.app/Contents/MacOS/zoom.us', \
+                '/System/Applications/FaceTime.app/Contents/MacOS/FaceTime', \
+                '/Applications/Webex.app/Contents/MacOS/Webex')
 DEVICE_NAME = 'MyBLEDevice'
 SERVICE_UUID = "55725ac1-066c-48b5-8700-2d9fb3603c5e"
 CHARACTERISTIC_UUID = '69ddb59c-d601-4ea4-ba83-44f679a670ba'
@@ -93,7 +97,7 @@ async def main():
                         b = b'\x01' if app_running else b'\x00'
 
                         await asyncio.wait_for(client.write_gatt_char(CHARACTERISTIC_UUID, b, response=True), timeout=10)
-                    await asyncio.sleep(2.0)
+                    await asyncio.sleep(10.0)
         except (asyncio.TimeoutError, BleakError) as e:
             logger.info(f'Exception {e=}')
         except Exception as e:
