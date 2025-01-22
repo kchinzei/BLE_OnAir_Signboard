@@ -32,6 +32,8 @@ from bleak.exc import BleakError
 
 APPS_TO_FIND = ('/Applications/Microsoft Teams.app/Contents/MacOS/Teams', \
                 '/Applications/Microsoft Teams classic.app/Contents/MacOS/Teams', \
+                '/Applications/Microsoft Teams (work or school).app/Contents/MacOS/MSTeams', \
+                '/Applications/Microsoft Teams.app/Contents/MacOS/MSTeams', \
                 '/Applications/zoom.us.app/Contents/MacOS/zoom.us', \
                 '/System/Applications/FaceTime.app/Contents/MacOS/FaceTime', \
                 '/Applications/Webex.app/Contents/MacOS/Webex')
