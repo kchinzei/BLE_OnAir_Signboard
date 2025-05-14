@@ -79,7 +79,9 @@ def check_app_running(apps):
 
 async def main():
     global manual_sw_state
-    while True:
+    looping = True
+    
+    while looping:
         device = None
         while device is None:
             device = await BleakScanner.find_device_by_name(DEVICE_NAME, timeout=10)
@@ -102,12 +104,17 @@ async def main():
                     await asyncio.sleep(10.0)
         except (asyncio.TimeoutError, BleakError) as e:
             logger.info(f'Exception {e=}')
+        except asyncio.CancelledError: # instead of KeyboardInterrupt
+            logger.info('\n⛔️ Stopped. (Likely interrupted by user.)')
+            looping = False
         except Exception as e:
             logger.info(f'Other exception {e=}')
-
-        await client.disconnect()
-        print(f'disconnected. wait for connecting again')
-        device = None
+        finally:
+            await client.disconnect()
+            print(f'disconnected.')
+            if looping:
+                print('Continue tring to connect again.')
+            device = None
         # Go to top
 
 
