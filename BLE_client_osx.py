@@ -111,7 +111,7 @@ async def main():
             logger.info(f'Other exception {e=}')
         finally:
             await client.disconnect()
-            print(f'disconnected.')
+            print(f'\ndisconnected.')
             if looping:
                 print('Continue tring to connect again.')
             device = None
